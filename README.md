@@ -17,7 +17,10 @@ We meten waterstanden met kleine sensoren:
 
 ## Het probleem: ongeldige metingen
 
-Soms zitten er foute metingen in de data – deze "outliers" of "anomalieën" verstoren de werking:
+Soms zitten er foute metingen in de data – deze **"outliers"** of **"anomalieën"** verstoren de werking.
+
+De foute metingen zijn duidelijk zichtbaar in onderstaande grafiek:
+
 ![Outliers](img/screenshot-outliers.png)
 
 ## Oorzaken
