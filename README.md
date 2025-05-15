@@ -3,8 +3,8 @@
 ## Project “WAARSCHUW”
 **W**ater **A**nomalie **A**larm **R**egistratie **S**ysteem voor **C**ontrole en **H**et **U**itfilteren van **W**aarden
 
-Water wordt steeds belangrijker – en dus ook het meten van waterstanden.  Zowel een tekort aan water als een teveel ervan kan voor allerlei problemen zorgen.  Vanuit die behoefte is wateralarm.be ontstaan: een platform dat mensen inzicht geeft in o.a. waterputten en grondvochtigheid.
-Wat begon als een hobbyproject om Arduino aan te leren voor aan CoderDojo Torhout, groeit intussen uit tot een kleine startup.
+Water wordt steeds belangrijker – en dus ook het meten van waterstanden.  Zowel een tekort aan water als een teveel ervan kan voor allerlei problemen zorgen.  Vanuit die behoefte is [wateralarm.be](https://www.wateralarm.be/) ontstaan: een platform dat mensen inzicht geeft in o.a. waterputten en grondvochtigheid.
+Wat begon als een hobbyproject om Arduino aan te leren in [CoderDojo Torhout](https://torhout.coderdojobelgium.be/), groeit intussen uit tot een kleine startup.
 
 ## Context
 We meten waterstanden met kleine sensoren:
@@ -17,7 +17,7 @@ We meten waterstanden met kleine sensoren:
 
 ![Outliers](img/sensor-mvh.jpg)
 
-## Het probleem: ongeldige metingen
+## Het probleem: **Ongeldige metingen**
 
 Soms zitten er foute metingen in de data – deze **"outliers"** of **"anomalieën"** verstoren de werking.
 
