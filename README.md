@@ -42,7 +42,7 @@ Hoewel het om een beperkt aantal foute metingen gaat, zorgen ze toch voor hinder
 
 Let wel dat niet elke plotse stijging of daling abnormaal is – een regenwaterput kan immers snel gevuld worden, door hevige regen of manueel bijvullen.  Sommige sprongen zijn dus perfect normaal.  In de grafiek hierboven is dit ook te zien.
 
-## **De opdracht**
+## **==> De opdracht <==**
 - **Hoe kunnen we outliers automatisch detecteren en filteren?**
 - **Kunnen we daarnaast ook andere gebeurtenissen herkennen, zoals het plots vullen of leeglopen van een put?**
 
