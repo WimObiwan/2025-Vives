@@ -15,6 +15,8 @@ We meten waterstanden met kleine sensoren:
   - Gebruikt om gebruikers te waarschuwen bij drempeloverschrijdingen.
   - Ingezet voor data-analyse en onderzoek.
 
+![Outliers](img/sensor-mvh.jpg)
+
 ## Het probleem: ongeldige metingen
 
 Soms zitten er foute metingen in de data – deze **"outliers"** of **"anomalieën"** verstoren de werking.
