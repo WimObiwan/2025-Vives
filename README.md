@@ -67,11 +67,12 @@ Let wel dat niet elke plotse stijging of daling abnormaal is – een regenwaterp
 
 Het is absoluut niet de bedoeling om je in een bepaalde richting te duwen, maar mogelijkheden zijn:
 - Statistische methoden zoals de **Z-score**.
-- Een **double-moving-average techniek (met een moving-average vóór en na de "huidige" meting).
+- Een **double-moving-average** techniek (met een moving-average vóór en na de "huidige" meting).
 - **Machine Learning**, bijvoorbeeld met ML.NET.
 - Inspiratie:
   - [Medium: Outlier Detection and Treatment](https://medium.com/@aakash013/outlier-detection-treatment-z-score-iqr-and-robust-methods-398c99450ff3)
   - [Detecting Anomalies with .NET and ML.NET](https://dev.to/alisson_podgurski/detecting-anomalies-with-net-and-mlnet-a-practical-guide-ng5)
+  - [Anomaly detection in Azure Stream Analytics](https://learn.microsoft.com/en-us/azure/stream-analytics/stream-analytics-machine-learning-anomaly-detection)
 
 ## Extra uitdaging: “circadisch” effect in de metingen
 De waterstand worden meestal gemeten via een ultrasone puls (“echo”).  De tijd die die puls nodig heeft om terug te keren hangt af van **de temperatuur van de lucht** boven het wateroppervlak.  De **snelheid van geluid** verandert immers bij verschillende temperaturen.  Het **zonlicht verwarmt het metalen putdeksel**, waardoor de lucht erboven opwarmt.
