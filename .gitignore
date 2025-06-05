@@ -1,3 +1,5 @@
 .qodo
 debug.log
 .vs/
+bin/
+obj/
