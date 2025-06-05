@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ibanb\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj": {}
+    "C:\\Users\\Tijl\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ibanb\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj": {
+    "C:\\Users\\Tijl\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ibanb\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj",
+        "projectUniqueName": "C:\\Users\\Tijl\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj",
         "projectName": "AnomalyDetection",
-        "projectPath": "C:\\Users\\ibanb\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj",
-        "packagesPath": "C:\\Users\\ibanb\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ibanb\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\obj\\",
+        "projectPath": "C:\\Users\\Tijl\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj",
+        "packagesPath": "C:\\Users\\Tijl\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tijl\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ibanb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tijl\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -71,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
