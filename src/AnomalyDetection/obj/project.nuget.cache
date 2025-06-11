@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "V8XyZIuZA0w=",
+  "dgSpecHash": "y1jlkS+m9No=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Tijl\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj",
+  "projectFilePath": "C:\\Users\\ibanb\\source\\repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Tijl\\.nuget\\packages\\csvhelper\\33.1.0\\csvhelper.33.1.0.nupkg.sha512"
+    "C:\\Users\\ibanb\\.nuget\\packages\\csvhelper\\33.1.0\\csvhelper.33.1.0.nupkg.sha512"
   ],
   "logs": []
 }

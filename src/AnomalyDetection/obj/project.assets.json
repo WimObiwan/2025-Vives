@@ -51,23 +51,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tijl\\.nuget\\packages\\": {},
+    "C:\\Users\\ibanb\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tijl\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj",
+      "projectUniqueName": "C:\\Users\\ibanb\\source\\repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj",
       "projectName": "AnomalyDetection",
-      "projectPath": "C:\\Users\\Tijl\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj",
-      "packagesPath": "C:\\Users\\Tijl\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tijl\\Source\\Repos\\2025-Vives\\src\\AnomalyDetection\\obj\\",
+      "projectPath": "C:\\Users\\ibanb\\source\\repos\\2025-Vives\\src\\AnomalyDetection\\AnomalyDetection.csproj",
+      "packagesPath": "C:\\Users\\ibanb\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ibanb\\source\\repos\\2025-Vives\\src\\AnomalyDetection\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Tijl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ibanb\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -94,7 +94,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -121,7 +121,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
