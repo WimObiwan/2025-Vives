@@ -20,7 +20,7 @@ using var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.Invariant
 
 var records = csv.GetRecords<SensorData>().ToList();
 
-//group by sensor code iban
+//group by sensor code (by Iban)
 var groupedBySensor = records
     .GroupBy(r => r.Tags)
     .ToList();
@@ -30,10 +30,10 @@ foreach (var group in groupedBySensor)
     var sensorId = group.Key;
     var sRecords = group.OrderBy(r => r.Time).ToList(); //sRecords = sorted records
     
-    //naam sensor huidige waarden
+    //name sensor current values
     Console.WriteLine($"\n Sensor: {sensorId}");
 
-    //IQR: kwartielen en interkwartielbereik berekenen
+    //IQR: calculate quartiles and interquartile range
     List<double> distances = sRecords.Select(r => (double)r.Distance.GetValueOrDefault()).ToList();
     distances.Sort();
     double Q1 = QuartileVM.GetPercentile(distances, 25);
@@ -41,45 +41,45 @@ foreach (var group in groupedBySensor)
     double IQR = Q3 - Q1;
     Console.WriteLine($"First quartile is: {Q1} \r\nThird quartile is: {Q3} \r\nIQR is: {IQR} \r\nSo we check for: {Q1 - 1.5 * IQR} or {Q3 + 1.5 * IQR}");
     
-    //lengte lijst sensorwaarden en increment integer voor foreach instellen
+    //set length of sensor records list and increment integer for foreach 
     var srCount = sRecords.Count();
     int i = 0;
 
-    //herken en print de anomalies: records van huidige sensor aflopen
+    //recognize and print anomalies: run down current sensor records
     foreach (var record in sRecords)
     {
-        //bool om bij te houden of mijn bewerking de huidige waarde als anomalie flagt
-        bool avgAnom = false; //avgAnom = anomalie a.d.h.v. gemiddelde
+        //bool to keep track whether my calculation flags the current value as anomaly
+        bool avgAnom = false; //avgAnom = anomaly based on averages
 
-        //de eerste en laatste waarde kunnen niet vergeleken worden met zowel vorige als volgende waarde
+        //first and last value can't be compared with both the previous as well as the next value
         if (record != sRecords[0] && i + 1 < srCount)
         {
-            //c= current (huidige waarde); b = before (vorige waarde); a = after (volgende waarde)
+            //c= current value; b = value before current; a = value after current
             var ba = (sRecords[i - 1].Distance + sRecords[i + 1].Distance) / 2;
             var bc = (sRecords[i - 1].Distance + record.Distance) / 2;
             var ca = (sRecords[i + 1].Distance + record.Distance) / 2;
-            //gemiddelde van ba, bc en ca berekend om te vergelijken en eventueel te gebruiken (momenteel niet in gebruik)
+            //average of ba, bc and ca calculated to compare and possibly use (currently unused)
             Console.WriteLine($"c= {record.Distance} ba= {ba} bc= {bc} ca= {ca}");
 
-            //scope vergroot: waarden moeten 9 vorige en volgende waarden hebben
+            //scope widened: values need to have 9 previous and 9 following values
             if (i >= 9 && i + 9 < srCount)
             {
-                //avgb9 = gemiddelde vorige 9 waarden
+                //avgb9 = average of previous 9 values
                 var avgb9 = (sRecords[i - 1].Distance + sRecords[i - 2].Distance + sRecords[i - 3].Distance + sRecords[i - 4].Distance + sRecords[i - 5].Distance + sRecords[i - 6].Distance + sRecords[i - 7].Distance + sRecords[i - 8].Distance + sRecords[i - 9].Distance) / 9;
                 Console.WriteLine($"avgb9= {avgb9} avgb9-c= {avgb9 - record.Distance} c-avgb9={record.Distance - avgb9}");
-                //avgb9c = absolute waarde van avgb9 - huidige waarde
+                //avgb9c = absolute value of avgb9 - current value
                 var avgb9c = Math.Abs(Convert.ToDecimal(avgb9 - record.Distance));
-                //avga9 = gemiddelde volgende 9
+                //avga9 = average of following 9
                 var avga9 = (sRecords[i + 1].Distance + sRecords[i + 2].Distance + sRecords[i + 3].Distance + sRecords[i + 4].Distance + sRecords[i + 5].Distance + sRecords[i + 6].Distance + sRecords[i + 7].Distance + sRecords[i + 8].Distance + sRecords[i + 9].Distance) / 9;
                 Console.WriteLine($"avga9= {avga9} avga9-c= {avga9 - record.Distance} c-avga9={record.Distance - avga9}");
-                //avga9c = absolute waarde van avga9 - huidig
+                //avga9c = absolute value of avga9 - current
                 var avga9c = Math.Abs(Convert.ToDecimal(avga9 - record.Distance));
                 
-                //als zowel de avgb9c als de avga9c groter dan of gelijk aan 3x de IQR zijn, als anomalie flaggen
+                //if both the avgb9c as well as the avga9c are bigger than or equal to 3x the IQR, flag as anomaly
                 if ((avgb9c >= 3 * Convert.ToDecimal(IQR)) && (avga9c >= 3 * Convert.ToDecimal(IQR))) avgAnom = true;
             }
 
-            //afhankelijk van welke flags ze hebben de waarden als mogelijke (1/2) of gegarandeerde anomalie (2/2) weergeven
+            //depending on their flags, view value as possible anomaly (1/2 flags) or certain anomaly (2/2) 
             if (avgAnom == true && ((record.Distance < (Q1 - 1.5 * IQR)) || (record.Distance > (Q3 + 1.5 * IQR))))
             {
                 Console.WriteLine($"!ANOMALY! Tag = {sensorId}, Time= {record.Time}, Distance = {record.Distance} mm (methode: avgAnom & IQR)");
@@ -91,7 +91,7 @@ foreach (var group in groupedBySensor)
                 Console.WriteLine($"!POSSIBLE ANOMALY! Tag = {sensorId}, Time= {record.Time}, Distance = {record.Distance} mm (method: avgAnom)");
             }
         } else if ((record.Distance < (Q1 - 1.5 * IQR)) || (record.Distance > (Q3 + 1.5 * IQR)))
-        { //eerste en laatste waarde checken voor IQR ondanks gebrek aan avgAnom check
+        { //check first and last value for IQR despite inability to perform avgAnom check
             Console.WriteLine($"!POSSIBLE ANOMALY! Tag = {sensorId}, Time= {record.Time}, Distance = {record.Distance} mm (method: IQR)");
         }
         i++; //increment +1
