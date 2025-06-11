@@ -34,26 +34,42 @@ var groupedBySensor = records
 foreach (var group in groupedBySensor)
 {
     var sensorId = group.Key;
-    var sortedRecords = group.OrderBy(r => r.Time).ToList();
+    var sRecords = group.OrderBy(r => r.Time).ToList();
 
     Console.WriteLine($"\n Sensor: {sensorId}");
 
-    List<double> distances = sortedRecords.Select(r => (double)r.Distance.GetValueOrDefault()).ToList();
+    List<double> distances = sRecords.Select(r => (double)r.Distance.GetValueOrDefault()).ToList();
     distances.Sort();
     double Q1 = QuartileVM.GetPercentile(distances, 25);
     double Q3 = QuartileVM.GetPercentile(distances, 75);
     double IQR = Q3 - Q1;
     Console.WriteLine($"First quartile is: {Q1} \r\nThird quartile is: {Q3} \r\nIQR is: {IQR} \r\nSo we check for: {Q1 - 1.5 * IQR} or {Q3 + 1.5 * IQR}");
+    var srCount = sRecords.Count();
     int i = 0;
 
     // !! toevoegen: bools iqr en z, writeline definite anomaly !!
 
     //print the anomalies
-    foreach (var record in sortedRecords)
+    foreach (var record in sRecords)
     {
         bool z = false;
-        if (record != sortedRecords[0] && i + 2 < sortedRecords.Count())
+        if (record != sRecords[0] && i + 1 < srCount)
         {
+            var ba = (sRecords[i - 1].Distance + sRecords[i + 1].Distance) / 2;
+            var bc = (sRecords[i - 1].Distance + record.Distance) / 2;
+            var ca = (sRecords[i + 1].Distance + record.Distance) / 2;
+            Console.WriteLine($"c= {record.Distance} ba= {ba} bc= {bc} ca= {ca}");
+            if (i >= 9 && i + 9 < srCount)
+            {
+                var gem9 = (sRecords[i - 1].Distance + sRecords[i - 2].Distance + sRecords[i - 3].Distance + sRecords[i - 4].Distance + sRecords[i - 5].Distance + sRecords[i - 6].Distance + sRecords[i - 7].Distance + sRecords[i - 8].Distance + sRecords[i - 9].Distance) / 9;
+                Console.WriteLine($"gem9= {gem9} gem9-c= {gem9 - record.Distance} c-gem9={record.Distance - gem9}");
+                var gem9c = Math.Abs(Convert.ToDecimal(gem9 - record.Distance));
+                var gep9 = (sRecords[i + 1].Distance + sRecords[i + 2].Distance + sRecords[i + 3].Distance + sRecords[i + 4].Distance + sRecords[i + 5].Distance + sRecords[i + 6].Distance + sRecords[i + 7].Distance + sRecords[i + 8].Distance + sRecords[i + 9].Distance) / 9;
+                Console.WriteLine($"gep9= {gep9} gep9-c= {gep9 - record.Distance} c-gep9={record.Distance - gep9}");
+                var gep9c = Math.Abs(Convert.ToDecimal(gep9 - record.Distance));
+                
+                if ((gem9c >= 3 * Convert.ToDecimal(IQR)) && (gep9c >= 3 * Convert.ToDecimal(IQR))) z = true;
+            }
 
             if (z == true && ((record.Distance < (Q1 - 1.5 * IQR)) || (record.Distance > (Q3 + 1.5 * IQR))))
             {
