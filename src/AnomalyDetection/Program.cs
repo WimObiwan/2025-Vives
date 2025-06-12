@@ -45,6 +45,10 @@ using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.Invarian
         Console.WriteLine($"First quartile is: {Q1} \r\nThird quartile is: {Q3} \r\nIQR is: {IQR} \r\nSo IQR method checks for values outside of: {Q1 - 1.5 * IQR} and {Q3 + 1.5 * IQR}");
 
         var srCount = sRecords.Count();
+        decimal avga9b = 0;
+        decimal avga9Minusb = 0;
+        decimal avga9bMinus = 0;
+        decimal bDistance = 0;
         int i = 0;
 
         //recognize and print anomalies: run down current sensor records (mainly by Tijl)
@@ -65,6 +69,42 @@ using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.Invarian
                 //if both the avgb9c as well as the avga9c are bigger than or equal to 3x the IQR, flag as anomaly
                 if ((avgb9c >= 3 * Convert.ToDecimal(IQR)) && (avga9c >= 3 * Convert.ToDecimal(IQR)))
                     avgAnom = true;
+
+                //trying to identify natural steep rises and falls
+                if (i == 9)
+                {
+                    bDistance = Convert.ToDecimal(sRecords[i - 1].Distance);
+                    avga9b = Math.Abs(Convert.ToDecimal(Enumerable.Range(1, 9).Select(n => sRecords[i - 1 + n].Distance ?? 0).Average() - sRecords[i - 1].Distance));
+                    avga9Minusb = Convert.ToDecimal(Enumerable.Range(1, 9).Select(n => sRecords[i - 1 + n].Distance ?? 0).Average() - sRecords[i - 1].Distance);
+                    avga9bMinus = Convert.ToDecimal(sRecords[i - 1].Distance - Enumerable.Range(1, 9).Select(n => sRecords[i - 1 + n].Distance ?? 0).Average());
+                }
+                if (!avgAnom)
+                {
+                    var avgb9Minusc = Convert.ToDecimal(avgb9 - record.Distance);
+                    var avgb9cMinus = Convert.ToDecimal(record.Distance - avgb9);
+
+                    if (((avgb9c >= 2 * Convert.ToDecimal(IQR)) && (avga9b >= 2 * Convert.ToDecimal(IQR))) &&
+                        !((avgb9c >= 2 * Convert.ToDecimal(IQR)) && (avga9c >= 2 * Convert.ToDecimal(IQR))))
+                    {
+                        if (Decimal.IsPositive(avga9bMinus) && Decimal.IsNegative(avgb9cMinus))
+                        {
+                            Console.WriteLine($"This is a natural steep rise in the water level. b={bDistance} c={record.Distance} b-avga9={avga9bMinus} avgb9-c={avgb9Minusc}");
+                        } 
+                        else if (Decimal.IsPositive(avga9Minusb) && Decimal.IsNegative(avgb9Minusc))
+                        {
+                            Console.WriteLine($"This is a natural steep fall in the water level. b={bDistance} c={record.Distance} avga9-b={avga9Minusb} c-avgb9={avgb9cMinus}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"This should not be possible. b={bDistance} c={record.Distance} avga9-b={avga9Minusb} b-avga9={avga9bMinus} avgb9-c={avgb9Minusc} c-avgb9={avgb9cMinus}");
+                        }
+                    }
+
+                    bDistance = Convert.ToDecimal(record.Distance);
+                    avga9b = avga9c;
+                    avga9Minusb = Convert.ToDecimal(avga9 - record.Distance);
+                    avga9bMinus = Convert.ToDecimal(record.Distance - avga9);
+                }
             }
 
             if (avgAnom && iqrAnom)
