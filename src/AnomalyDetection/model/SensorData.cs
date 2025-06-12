@@ -15,13 +15,13 @@ namespace AnomalyDetection.Model
         public DateTime Time { get; set; }
 
         [Name("BatV")]
-        public double? BatV { get; set; }
+        public double? BatteryRaw { get; set; }
 
         [Name("RSSI")]
         public int? RSSI { get; set; }
 
         [Name("batV")]
-        public double? Batv { get; set; }
+        public double? BatteryProcessed { get; set; }
 
         [Name("distance")]
         public int? Distance { get; set; }
@@ -34,6 +34,10 @@ namespace AnomalyDetection.Model
 
         [Name("liter")]
         public string? Liter { get; set; }
+
+        // new record for the new distances without anomalies
+        [Name("fixedDistance")]
+        public int? FixedDistance { get; set; }
     }
 }
 
