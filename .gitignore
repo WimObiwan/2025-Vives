@@ -1,5 +1,5 @@
 .qodo
 debug.log
 .vs/
-bin/
-obj/
+**/bin/
+**/obj/
